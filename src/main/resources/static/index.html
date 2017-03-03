@@ -1,0 +1,50 @@
+<html ng-app="myApp" ng-controller="MainController">
+<head>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-app="myApp" ng-controller="MainController">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.6.2/angular-locale_fr-fr.min.js"></script>
+<script src="js/app.js"></script>
+<div>
+    <header>
+        <h1>Player</h1>
+        <form>
+            <input type="text" ng-model="search" ng-change="fetch(0)"/>
+            <select ng-model="pageSize" ng-change="changePageSize()"></select>
+        </form>
+    </header>
+    <section class="songs">
+        <h2>{{total}} morceaux</h2>
+        <ul>
+            <li ng-repeat="item in items" track by $index">
+                <button ng-click="play(item, true)" class="cursor">{{item.title}}</button>
+                <button ng-click="addTofavorites(item)" class="cursor">&#128278;</button>
+            </li>
+        </ul>
+    </section>
+    <footer ng-if="total != 0">
+        <span>page {{offset / pageSize +1 | number:0}} sur {{total / pageSize | ceil}}</span>
+        <button ng-click="prevPage()" ng-disabled="!hasPrevPage()" class="prev">&#10096;</button>
+        <button ng-click="nextPage()" ng-disabled="!hasNextPage()" class="next">&#10097;</button>
+    </footer>
+</div>
+<section class="history songs">
+    <h2>Historique</h2>
+    <ul>
+        <li ng-repeat="item in history track by $index">
+            <button ng-click="play(item)" class="cursor">{{item.title}}</button>
+        </li>
+    </ul>
+</section>
+<section class="favorites songs">
+    <h2>Favoris</h2>
+    <ul>
+        <li ng-repeat="item in favorites track by $index">
+            <button ng-click="play(item, true)" class="cursor">{{item.title}}</button>
+            <button ng-click="removeFromfavorites(item)" class="cursor delete">(delete)</button>
+        </li>
+    </ul>
+</section>
+</body>
+</html>
