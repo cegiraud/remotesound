@@ -1,0 +1,4 @@
+spring.h2.console.enabled: true
+spring.datasource.initialize: true
+spring.jpa.hibernate.ddl-auto: create
+

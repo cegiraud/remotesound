@@ -1,5 +1,7 @@
 package com.github.cegiraud.remotesound.rest;
 
+import com.github.cegiraud.remotesound.config.RemoteSoundApplicationProperties;
+import com.github.cegiraud.remotesound.types.SoundActionType;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import org.apache.http.client.utils.URIBuilder;
@@ -23,10 +25,18 @@ import java.nio.file.Path;
  */
 @Controller
 public class MainController {
+
+    private final RemoteSoundApplicationProperties applicationProperties;
+
+    public MainController(RemoteSoundApplicationProperties applicationProperties) {
+        this.applicationProperties = applicationProperties;
+    }
+
     @GetMapping("/")
     public ModelAndView redirect() {
         return new ModelAndView("index.html");
     }
+
 
     @PostMapping(value = "/play")
     @ResponseStatus(HttpStatus.OK)
@@ -38,7 +48,6 @@ public class MainController {
         mediaPlayer.play();
     }
 
-
     @GetMapping(value = "/playurl")
     @ResponseStatus(HttpStatus.OK)
     public void play(@RequestParam URI uri) throws Exception {
@@ -47,6 +56,13 @@ public class MainController {
         final Media media = new Media(uriBuilder.build().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
+    }
+
+    @GetMapping("/soundcontrol")
+    @ResponseStatus(HttpStatus.OK)
+    public void play(@RequestParam SoundActionType action) throws IOException {
+        String command = "powershell /Command \"" + applicationProperties.getSound().getControl().get(action) + "\"";
+        Runtime.getRuntime().exec(command);
     }
 
 }

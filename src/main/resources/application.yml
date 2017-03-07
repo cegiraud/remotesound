@@ -1,4 +1,10 @@
 spring.http.multipart.max-file-size: 6MB
+spring.datasource.url: jdbc:h2:~/remote-sound;DB_CLOSE_ON_EXIT=FALSE
+spring.datasource.driverClassName: org.h2.Driver
+spring.datasource.username: remote-sound
+spring.datasource.password:
+spring.jpa.hibernate.ddl-auto: validate
+spring.datasource.initialize: false
 
 sound:
   control:
@@ -7,3 +13,4 @@ sound:
     max: $wshShell = new-object -com wscript.shell;1..50 | % {$wshShell.SendKeys([char]175)};
     down: $wshShell = new-object -com wscript.shell;$wshShell.SendKeys([char]174)
     up: $wshShell = new-object -com wscript.shell;$wshShell.SendKeys([char]175)
+

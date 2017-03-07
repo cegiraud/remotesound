@@ -19,7 +19,7 @@ h1 {
     margin-bottom: 50px;
 }
 
-input {
+header input {
     text-align: left;
     font-size: 30px;
 }
@@ -37,7 +37,7 @@ input {
     padding: 0;
 }
 
-.songs ul li {
+.songs ul li , .songs ul button {
     list-style-type: none;
     text-align: left;
 }
@@ -50,7 +50,7 @@ button {
     cursor: pointer;
 }
 
-button:disabled{
+button:disabled {
     color: lightgray;
     cursor: not-allowed;
 }
@@ -73,10 +73,9 @@ footer span.prev, footer span.next {
     margin: 0;
     float: left;
     border: 1px black solid;
-
 }
 
-.favorites, .history {
+.favorites, .history{
     position: fixed;
     font-size: 15px;
     top: 5px;
@@ -85,13 +84,32 @@ footer span.prev, footer span.next {
 }
 
 .favorites {
-    left: 0px;
+    left: 0;
     float: left;
 }
 
 .history {
     right: 5px;
     float: right;
+}
+
+.add-songs {
+    margin-top: 15px;
+    border-top: 1px solid darkgray;
+    text-align: center;
+}
+
+.add-songs input {
+    width: 300px;
+    font-size: 20px;
+    margin: 0 5px;
+}
+
+.add-songs button {
+    border: 1px solid darkgray;
+    border-radius: 10px;
+    font-size: 20px;
+
 }
 
 .delete {

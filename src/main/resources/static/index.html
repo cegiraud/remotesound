@@ -10,23 +10,24 @@
     <header>
         <h1>Player</h1>
         <form>
-            <input type="text" ng-model="search" ng-change="fetch(0)"/>
-            <select ng-model="pageSize" ng-change="changePageSize()"></select>
+            <input type="text" ng-model="search" ng-change="fetch()"/>
         </form>
     </header>
     <section class="songs">
         <h2>{{total}} morceaux</h2>
         <ul>
-            <li ng-repeat="item in items" track by $index">
+            <li ng-repeat="item in items track by $index">
                 <button ng-click="play(item, true)" class="cursor">{{item.title}}</button>
                 <button ng-click="addTofavorites(item)" class="cursor">&#128278;</button>
             </li>
         </ul>
     </section>
     <footer ng-if="total != 0">
-        <span>page {{offset / pageSize +1 | number:0}} sur {{total / pageSize | ceil}}</span>
-        <button ng-click="prevPage()" ng-disabled="!hasPrevPage()" class="prev">&#10096;</button>
-        <button ng-click="nextPage()" ng-disabled="!hasNextPage()" class="next">&#10097;</button>
+        <span>page {{page +1 | number:0}} sur {{totalPages}}</span>
+        <button ng-click="fetch(first.href)" ng-disabled="!first" class="prev">&#10096;&#10096;</button>
+        <button ng-click="fetch(prev.href)" ng-disabled="!prev" class="prev">&#10096;</button>
+        <button ng-click="fetch(next.href)" ng-disabled="!next" class="next">&#10097;</button>
+        <button ng-click="fetch(last.href)" ng-disabled="!last" class="next">&#10097;&#10097;</button>
     </footer>
 </div>
 <section class="history songs">
@@ -39,12 +40,24 @@
 </section>
 <section class="favorites songs">
     <h2>Favoris</h2>
-    <ul>
-        <li ng-repeat="item in favorites track by $index">
-            <button ng-click="play(item, true)" class="cursor">{{item.title}}</button>
-            <button ng-click="removeFromfavorites(item)" class="cursor delete">(delete)</button>
-        </li>
-    </ul>
+    <article>
+        <ul>
+            <li ng-repeat="item in favorites track by $index">
+                <button ng-click="play(item, true)" class="cursor">{{item.title}}</button>
+                <button ng-click="removeFromfavorites(item)" class="cursor delete">(delete)</button>
+            </li>
+        </ul>
+    </article>
+    <article class="">
+        <h2>Ajout</h2>
+        <form>
+            <div>
+                <p><input placeholder="URL" ng-model="filename"/></p>
+                <p><input placeholder="Titre" ng-model="title"/></p>
+            </div>
+            <button ng-click="addSongs()">Valider</button>
+        </form>
+    </article>
 </section>
 </body>
 </html>
