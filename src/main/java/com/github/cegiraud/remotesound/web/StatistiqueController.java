@@ -1,16 +1,14 @@
 package com.github.cegiraud.remotesound.web;
 
+import com.github.cegiraud.remotesound.entity.Statistiques;
 import com.github.cegiraud.remotesound.service.StatistiqueService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Map;
+import java.util.List;
 
-/**
- * Created by cegiraud on 27/02/2017.
- */
 @Controller
 @RequestMapping("/statistiques")
 public class StatistiqueController {
@@ -23,7 +21,7 @@ public class StatistiqueController {
 
     @GetMapping
     @ResponseBody
-    public Map<String, Map<String, Long>> statistiques() {
+    public List<Statistiques> statistiques() {
         return statistiqueService.findAll();
     }
 

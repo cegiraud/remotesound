@@ -1,10 +1,10 @@
 package com.github.cegiraud.remotesound.service;
 
-import com.github.cegiraud.remotesound.entity.Sound;
+import com.github.cegiraud.remotesound.entity.Statistiques;
 import com.github.cegiraud.remotesound.repository.StatistiqueRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * Created by ceGiraud on 08/03/2017.
@@ -23,7 +23,7 @@ public class StatistiqueService {
     }
 
 
-    public Map<String , Map<String, Long>> findAll() {
+    public List<Statistiques> findAll() {
         return statistiqueRepository.findall();
     }
 }

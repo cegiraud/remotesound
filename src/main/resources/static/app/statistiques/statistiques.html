@@ -6,13 +6,13 @@
                         ng-click="statistiques.loadStatistiques()"></button>
             </h1>
             <section>
-                <div class="panel panel-default" ng-repeat="(host, statistique) in statistiques.statistiques track by $index">
-                    <div class="panel-heading">{{host}}</div>
+                <div class="panel panel-default" ng-repeat="statistique in statistiques.statistiques track by $index">
+                    <div class="panel-heading">{{statistique.host}} - {{statistique.entries|total:'count'}}</div>
                     <table class="table text-left">
                         <tbody>
-                        <tr ng-repeat="(url, count) in statistique">
-                            <td>{{url}}</td>
-                            <td>{{count}}</td>
+                        <tr ng-repeat="entry in statistique.entries">
+                            <td>{{entry.url}}</td>
+                            <td>{{entry.count}}</td>
                         </tr>
                         </tbody>
                     </table>
