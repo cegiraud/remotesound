@@ -1,0 +1,44 @@
+ul li , ul button {
+    list-style-type: none;
+    text-align: left;
+}
+
+.side-box li {
+    font-size: smaller;
+}
+
+.side-box ul {
+    padding: 5px;
+}
+
+.jumbotron {
+    margin: 5px!important;
+    padding: 5px!important;
+}
+
+button {
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+button:disabled {
+    color: lightgray;
+    cursor: not-allowed;
+}
+
+footer .navbar {
+    height: 15px !important;
+    min-height: 20px!important;
+}
+
+
+footer {
+    margin-top: 20px;
+}
+
+
+.delete {
+    color: red;
+    font-size: 10px;
+}

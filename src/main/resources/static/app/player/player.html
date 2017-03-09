@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="jumbotron text-center side-box">
+            <h2>Favoris</h2>
+            <section>
+                <ul>
+                    <li ng-repeat="item in player.favorites track by $index">
+                        <button ng-click="player.play(item, true)" class="cursor">{{item.title}}</button>
+                        <button ng-click="player.removeFromfavorites(item)" class="cursor delete">(delete)</button>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="jumbotron text-center">
+            <section>
+                <h1>Player</h1>
+                <div class="row">
+                    <form class="col-md-10 col-md-offset-1">
+                        <input type="text" class="form-control" ng-model="player.search" ng-change="player.fetch()"/>
+                    </form>
+                </div>
+            </section>
+            <section class="songs text-center">
+                <h2>{{player.total}} morceaux</h2>
+                <ul>
+                    <li ng-repeat="item in player.items track by item.id">
+                        <button ng-click="player.play(item, true)" class="cursor">{{item.title}}
+                        </button>
+                        <button ng-click="player.addTofavorites(item)" class="cursor glyphicon glyphicon-tags"/>
+                    </li>
+                </ul>
+            </section>
+            <section ng-if="total != 0">
+                <span>page {{player.page +1 | number:0}} sur {{player.totalPages}}</span>
+                <button ng-click="player.fetch()" ng-disabled="player.page==0" class="prev">&#10096;&#10096;</button>
+                <button ng-click="player.fetch(player.page-1)" ng-disabled="player.first" class="prev">&#10096;</button>
+                <button ng-click="player.fetch(player.page+1)" ng-disabled="player.last" class="next">&#10097;</button>
+                <button ng-click="player.fetch(player.totalPages -1)"
+                        ng-disabled="player.page==player.totalPages -1"
+                        class="next">&#10097;&#10097;</button>
+            </section>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="jumbotron text-center side-box">
+            <h2>Historique</h2>
+            <section>
+                <ul>
+                    <li ng-repeat="item in player.history track by $index">
+                        <button ng-click="player.play(item)" class="cursor">{{item.title}}</button>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</div>

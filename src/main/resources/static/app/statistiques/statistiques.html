@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="jumbotron text-center">
+            <h1>Statistiques
+                <button class="glyphicon glyphicon-refresh btn btn-lg"
+                        ng-click="statistiques.loadStatistiques()"></button>
+            </h1>
+            <section>
+                <div class="panel panel-default" ng-repeat="(host, statistique) in statistiques.statistiques track by $index">
+                    <div class="panel-heading">{{host}}</div>
+                    <table class="table text-left">
+                        <tbody>
+                        <tr ng-repeat="(url, count) in statistique">
+                            <td>{{url}}</td>
+                            <td>{{count}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

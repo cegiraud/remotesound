@@ -1,6 +1,8 @@
-package com.github.cegiraud.remotesound.rest;
+package com.github.cegiraud.remotesound.web;
 
 import com.github.cegiraud.remotesound.config.RemoteSoundApplicationProperties;
+import com.github.cegiraud.remotesound.entity.Sound;
+import com.github.cegiraud.remotesound.service.StatistiqueService;
 import com.github.cegiraud.remotesound.types.SoundActionType;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -28,8 +31,11 @@ public class MainController {
 
     private final RemoteSoundApplicationProperties applicationProperties;
 
-    public MainController(RemoteSoundApplicationProperties applicationProperties) {
+    private final StatistiqueService statistiqueService;
+
+    public MainController(RemoteSoundApplicationProperties applicationProperties, StatistiqueService statistiqueService) {
         this.applicationProperties = applicationProperties;
+        this.statistiqueService = statistiqueService;
     }
 
     @GetMapping("/")
@@ -50,12 +56,13 @@ public class MainController {
 
     @GetMapping(value = "/playurl")
     @ResponseStatus(HttpStatus.OK)
-    public void play(@RequestParam URI uri) throws Exception {
+    public void play(@RequestParam URI uri, HttpServletRequest httpServletRequest) throws Exception {
         URIBuilder uriBuilder = new URIBuilder("http://localhost:8080/stream")
                 .addParameter("uri", uri.toString());
         final Media media = new Media(uriBuilder.build().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
+        statistiqueService.increment(httpServletRequest.getRemoteHost(), uri.toString());
     }
 
     @GetMapping("/soundcontrol")

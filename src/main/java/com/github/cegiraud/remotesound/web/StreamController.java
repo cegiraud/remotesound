@@ -1,4 +1,4 @@
-package com.github.cegiraud.remotesound.rest;
+package com.github.cegiraud.remotesound.web;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,6 +29,4 @@ public class StreamController {
     public ResponseEntity<byte[]> stream(@RequestParam URI uri) throws URISyntaxException {
         return restTemplate.getForEntity(uri, byte[].class);
     }
-
-
 }
