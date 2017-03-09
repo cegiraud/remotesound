@@ -11,6 +11,16 @@
                 </ul>
             </section>
         </div>
+        <div class="jumbotron text-center side-box">
+            <h2>Ajout</h2>
+            <div class="row">
+                <form class="col-md-10 col-md-offset-1">
+                    <input class="form-control" placeholder="Titre" ng-model="player.title"/>
+                    <input class="form-control" placeholder="URL" ng-model="player.url"/></p>
+                </form>
+            </div>
+            <button class="btn btn-default" ng-click="player.addSongs()">Valider</button>
+        </div>
     </div>
     <div class="col-md-6">
         <div class="jumbotron text-center">
@@ -55,4 +65,5 @@
             </section>
         </div>
     </div>
+
 </div>
