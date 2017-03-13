@@ -8,9 +8,9 @@ spring.datasource.initialize: false
 
 sound:
   control:
-    toggle-mute: $wshShell = new-object -com wscript.shell;$wshShell.SendKeys([char]173)
-    min: $wshShell = new-object -com wscript.shell;1..50 | % {$wshShell.SendKeys([char]174)};
-    max: $wshShell = new-object -com wscript.shell;1..50 | % {$wshShell.SendKeys([char]175)};
-    down: $wshShell = new-object -com wscript.shell;$wshShell.SendKeys([char]174)
-    up: $wshShell = new-object -com wscript.shell;$wshShell.SendKeys([char]175)
+    toggle-mute: $wshShell.SendKeys([char]173)
+    min: 1..50 | % {$wshShell.SendKeys([char]174)}
+    max: 1..50 | % {$wshShell.SendKeys([char]175)}
+    down: $wshShell.SendKeys([char]174)
+    up: $wshShell.SendKeys([char]175)
 
