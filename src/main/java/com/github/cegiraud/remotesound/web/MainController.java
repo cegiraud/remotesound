@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -73,7 +74,8 @@ public class MainController {
         final Media media = new Media(uriBuilder.build().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
-        statistiqueService.increment(httpServletRequest.getRemoteHost(), uri.toString());
+        String hostname = InetAddress.getByName(httpServletRequest.getRemoteHost()).getHostName();
+        statistiqueService.increment(hostname, uri.toString());
     }
 
     @GetMapping("/soundcontrol")
