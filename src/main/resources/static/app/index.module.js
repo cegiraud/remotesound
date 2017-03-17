@@ -5,6 +5,7 @@
         'remotesound.core',
         'remotesound.layout',
         'remotesound.player',
+        'remotesound.playing',
         'remotesound.statistiques'
     ]);
 

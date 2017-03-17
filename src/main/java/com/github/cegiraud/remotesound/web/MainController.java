@@ -1,11 +1,10 @@
 package com.github.cegiraud.remotesound.web;
 
 import com.github.cegiraud.remotesound.config.RemoteSoundApplicationProperties;
-import com.github.cegiraud.remotesound.service.StatistiqueService;
+import com.github.cegiraud.remotesound.service.PlayerService;
 import com.github.cegiraud.remotesound.types.SoundActionType;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import org.apache.http.client.utils.URIBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,13 +33,13 @@ public class MainController {
 
     private final RemoteSoundApplicationProperties applicationProperties;
 
-    private final StatistiqueService statistiqueService;
+    private final PlayerService playerService;
 
     private PrintWriter commandsToSend;
 
-    public MainController(RemoteSoundApplicationProperties applicationProperties, StatistiqueService statistiqueService) {
+    public MainController(RemoteSoundApplicationProperties applicationProperties, PlayerService playerService) {
         this.applicationProperties = applicationProperties;
-        this.statistiqueService = statistiqueService;
+        this.playerService = playerService;
     }
 
     @PostConstruct
@@ -69,13 +68,8 @@ public class MainController {
     @GetMapping(value = "/playurl")
     @ResponseStatus(HttpStatus.OK)
     public void play(@RequestParam URI uri, HttpServletRequest httpServletRequest) throws Exception {
-        URIBuilder uriBuilder = new URIBuilder("http://localhost:8080/stream")
-                .addParameter("uri", uri.toString());
-        final Media media = new Media(uriBuilder.build().toString());
-        final MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
         String hostname = InetAddress.getByName(httpServletRequest.getRemoteHost()).getHostName();
-        statistiqueService.increment(hostname, uri.toString());
+        playerService.play(uri, hostname);
     }
 
     @GetMapping("/soundcontrol")

@@ -2,7 +2,8 @@
     'use strict';
 
     angular.module('remotesound.core', [
-        'ui.router'
+        'ui.router',
+        'AngularStompDK'
     ]);
 
 })();

@@ -4,12 +4,19 @@
     angular
         .module('remotesound')
         .filter('total', filterTotal)
-        .config(config);
+        .config(routeConfig)
+        .config(stompConfig);
 
-    function config($urlRouterProvider) {
+    function routeConfig($urlRouterProvider) {
         $urlRouterProvider.otherwise('/player');
     }
 
+    function stompConfig(ngstompProvider) {
+        ngstompProvider
+            .url('/remotesound')
+            .class(SockJS)
+            .autoConnect(true);
+    }
     function filterTotal () {
         return function (input, property) {
             var i = input instanceof Array ? input.length : 0;

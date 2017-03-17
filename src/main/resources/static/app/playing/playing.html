@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="jumbotron text-center">
+            <h1>Playing</h1>
+            <section>
+                <table class="table text-left">
+                    <tbody>
+                    <tr ng-repeat="message in playing.messages.values | orderBy:'-id' track by $index">
+                        <td>{{message.hostname}}</td>
+                        <td>{{message.uri}}</td>
+                        <td><span class="glyphicon"
+                                  ng-class="message.stop ? 'glyphicon-stop' : 'glyphicon-play'"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+</div>

@@ -10,7 +10,7 @@
                     <div class="panel-heading">{{statistique.host}} - {{statistique.entries|total:'count'}}</div>
                     <table class="table text-left">
                         <tbody>
-                        <tr ng-repeat="entry in statistique.entries">
+                        <tr ng-repeat="entry in statistique.entries | orderBy:'-count' track by $index">
                             <td>{{entry.url}}</td>
                             <td>{{entry.count}}</td>
                         </tr>
